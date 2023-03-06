@@ -24,8 +24,9 @@ def solve(new_file: str, old_file: str, arguments):
     """ Translates single file. """
     lines = read_lines(old_file)
     for line in lines:
-       if line != "\n":
-        line.msgstr = polib.unescape(translate(polib.escape(line.msgid), arguments))
+       line_str = polib.escape(line.msgid)
+       if line_str != "\n":
+        line.msgstr = polib.unescape(translate(line_str, arguments))
         print(f"Translated {lines.percent_translated()}% of the lines.")
     save_lines(new_file, lines)
 
